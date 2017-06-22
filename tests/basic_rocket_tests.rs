@@ -32,6 +32,11 @@ mod test_endpoints {
         world
     }
 
+    #[get("/hello_json", format = "application/json")]
+    fn hello_json() -> &'static str {
+        "world"
+    }
+
     // returns a configured Rocket, but with no mounts.
     pub fn ignite() -> Rocket {
         let config = ConfigBuilder::new(Environment::Development);
@@ -59,7 +64,7 @@ fn test_hello() {
 
     let spec = rocket_openapi::build_swagger_spec(&lit, "Hello World", "1.0");
     let test_data = test_data("tests/basic_rocket_test_hello.json");
-    
+
     let json = serde_json::to_string_pretty(&spec).expect("cound not serialize json");
     assert_eq!(json, test_data);
 }
@@ -71,7 +76,19 @@ fn test_hello_param() {
 
     let spec = rocket_openapi::build_swagger_spec(&lit, "Hello World", "1.0");
     let test_data = test_data("tests/basic_rocket_test_hello_param.json");
-    
+
+    let json = serde_json::to_string_pretty(&spec).expect("cound not serialize json");
+    assert_eq!(json, test_data);
+}
+
+#[test]
+fn test_hello_json() {
+    let lit = test_endpoints::ignite();
+    let lit = lit.mount("/", routes![test_endpoints::hello_json]);
+
+    let spec = rocket_openapi::build_swagger_spec(&lit, "Hello World", "1.0");
+    let test_data = test_data("tests/basic_rocket_test_hello_json.json");
+
     let json = serde_json::to_string_pretty(&spec).expect("cound not serialize json");
     assert_eq!(json, test_data);
 }

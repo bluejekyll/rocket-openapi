@@ -5,9 +5,15 @@
     "version": "1.0"
   },
   "paths": {
-    "/hello": {
+    "/hello_json": {
       "get": {
-        "operationId": "hello",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "hello_json",
         "responses": {},
         "parameters": []
       }
