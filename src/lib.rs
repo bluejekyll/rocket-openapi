@@ -20,7 +20,7 @@ use rocket::Rocket;
 use rocket_contrib::JSON;
 
 /// An endpoint for the OpenAPI Spec
-#[get("/spec", format = "application/json")]
+#[get("/spec")]
 pub fn spec<'s>(openapi: State<'s, Spec>) -> JSON<&'s Spec> {
     JSON(openapi.inner())
 }
