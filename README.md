@@ -1,3 +1,3 @@
-# A library to Generate an OpenAPI (Swagger) Spec of a Rocket service
+# OpenAPI (Swagger) Spec for Rocket services
 
-TBD
+This is currently a work in progress.
