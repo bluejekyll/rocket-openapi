@@ -69,7 +69,7 @@ pub fn build_swagger_spec(lit: &Rocket, service_name: &str, service_version: &st
         // TODO: extract first line of docs...
         
         // op.summary = Some(format!("{}", route));
-        op.operation_id = Some(route.handler_name.to_string());//Some();
+        op.operation_id = Some(route.handler_name.to_string());
         op.produces = route.format.as_ref().map(|f|vec![f.to_string()]);
         op.consumes = route.format.as_ref().map(|f|vec![f.to_string()]);
         op.responses = BTreeMap::new();
