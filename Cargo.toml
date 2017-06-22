@@ -1,0 +1,17 @@
+[package]
+name = "rocket-openapi"
+version = "0.0.1"
+authors = ["Benjamin Fry <benjaminfry@me.com>"]
+description = "A endpoint that can be added to Rocket to generate OpenAPI/Swagger service description"
+
+[lib]
+name = "rocket_openapi"
+path = "src/lib.rs"
+
+
+[dependencies]
+log = "^0.3.8"
+openapi = { version="^0.1.5", git = "https://github.com/bluejekyll/openapi.git", branch = "master" }
+rocket = { git = "https://github.com/bluejekyll/Rocket.git", branch = "bfry/rocket-openapi" }
+rocket_codegen = { git = "https://github.com/bluejekyll/Rocket.git", branch = "bfry/rocket-openapi" }
+rocket_contrib = { git = "https://github.com/bluejekyll/Rocket.git", branch = "bfry/rocket-openapi" }
