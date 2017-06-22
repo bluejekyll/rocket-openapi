@@ -36,7 +36,8 @@ pub fn build_swagger_spec(lit: &Rocket, service_name: &str, service_version: &st
     let mut paths = BTreeMap::<String, Operations>::new();
     for route in lit.routes() {
         debug!("documenting route: {}", route);
-        let mut ops = paths.entry(route.uri.path().to_string()).or_insert(Operations::default());
+        let path = route.uri.path().to_string().replace("<", "{").replace(">", "}");
+        let mut ops = paths.entry(path).or_insert(Operations::default());
 
         let param_indexes: Vec<(usize, usize)> = route.get_param_indexes(&route.uri);
         let url_path = route.uri.as_str();
@@ -65,7 +66,8 @@ pub fn build_swagger_spec(lit: &Rocket, service_name: &str, service_version: &st
             .collect::<Vec<_>>();
 
         let mut op = Operation::default();
-        op.summary = Some(format!("{}", route));
+        // TODO: extract first line of docs...
+        // op.summary = Some(format!("{}", route));
         op.responses = BTreeMap::new();
         op.parameters = Some(parameters);
 
